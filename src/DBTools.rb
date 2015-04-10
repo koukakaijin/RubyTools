@@ -7,8 +7,10 @@ rescue LoadError
 end
 class DBTools
 	#######################################################################
-	# sum
-	#  adds all the arguments and returns the result.
+	# create
+	#  creates a new db, if a db with this name already exits it leaves it 
+	#  unchanged. Default name "test.db" 
+	#  return -1 if file already exits
 	#######################################################################
 	def create(name="test.db")
 		#ensure file ends in .db
@@ -20,7 +22,22 @@ class DBTools
 			db = SQLite3::Database.new name
 			db.close
 		else
-			"there already exits a data base with the name #{name}"
+			#there already exits a data base with that name
+			-1
+		end
+	end
+	#######################################################################
+	# delete
+	#  delete a db if it exits, db name must be provided
+	#  return 1 if correct, -1 if file not found
+	#######################################################################
+	def delete(name)
+		#check if really exits.
+		if (File.file?"#{name}")
+			File.delete(name)
+		else
+			#There is no database with that name
+			-1
 		end
 	end
 end
