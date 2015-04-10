@@ -6,4 +6,11 @@ class DataTools
 	def sum(*args)
 		args.inject(:+)
 	end
+	#######################################################################
+	# mul
+	#  multiplies all the arguments and returns the result.
+	#######################################################################
+	def mul(*args)
+		args.inject(:*)
+	end
 end
